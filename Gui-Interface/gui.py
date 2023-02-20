@@ -7,12 +7,15 @@ sg.theme('Black')
 
 layout = [[clock],
           [sg.Text("Type a to-do")],
-          [sg.InputText(key="todo"), sg.Button("Add")],
+          [sg.InputText(tooltip="Enter Todo", key="todo"),
+           sg.Button(size=2,image_source='images/add.png', mouseover_colors='LightBlue2',
+                     tooltip='add ToDo', key='Add')],
           [sg.Listbox(values=get_todos(),
             key='todos',
             enable_events=True,
             size=[45,10]),
-          sg.Button("Edit"), sg.Button("Complete")],
+          sg.Button("Edit"), sg.Button(size=2,image_source='images/complete.png', mouseover_colors='LightBlue2',
+                     tooltip='Complete', key='Complete')],
           [sg.Button('Exit', size=10)]
         ]
 
