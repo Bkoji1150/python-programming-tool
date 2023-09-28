@@ -3,8 +3,11 @@ password = input("Enter password: ")
 count = 1
 
 while password != "pass123":
-    print(f"Sorry, user login failed!, logging {count} number of times")
+    print(f"wrong password, try again...")
     password = input("Enter password: ")
     count += 1
+    if count ==3:
+        break
+
 
 print("login successful")
