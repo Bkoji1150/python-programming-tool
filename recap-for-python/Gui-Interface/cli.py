@@ -1,6 +1,8 @@
+from functions import get_todos, write_todos
+import time
 
-
-file_name = 'files/todos.txt'
+now = time.strftime("%b %d, %Y, %H:%M:%S")
+print(f"Time is: {now}")
 
 while True:
     user_action = input("Type add, show, edit, complete: ").lower()
@@ -9,17 +11,17 @@ while True:
     if user_action.startswith('add'):
         todo = user_action[4:] + "\n"
 
-        with open(file_name) as file:
-            todos = file.readlines()
+        # Calling read function
+        todos = get_todos()
 
         todos.append(todo)
 
-        with open(file_name, 'w') as file:
-            file.writelines(todos)
+        # Calling read function
+        write_todos(todos)
 
     elif  user_action.startswith('show'):
-        with open(file_name) as file:
-                todos = file.readlines()
+        # Calling read function
+        todos = get_todos()
 
         for item,v in enumerate(todos, 1):
             v = v.strip('\n')
@@ -28,13 +30,13 @@ while True:
         try:
             number = int(user_action[5:])
             number = number - 1
-            with open(file_name) as file:
-                todos = file.readlines()
+            # Calling read function
+            todos = get_todos()
 
             new_todo = input("Enter new todo: ")
             todos[number] = new_todo + "\n"
-            with open(file_name, 'w') as file:
-                file.writelines( todos)
+            # Calling read function
+            write_todos(todos)
 
         except ValueError:
             print(f"Ooops! please provide only number.")
@@ -46,13 +48,13 @@ while True:
         try:
             number = int(user_action[9:])
 
-            with open(file_name) as file:
-                todos = file.readlines()
+            # Calling read function
+            todos = get_todos()
             index = number - 1
             todo_to_remove = todos[index].strip("\n")
             todos.pop(index)
-            with open(file_name, 'w') as file:
-                file.writelines(todos)
+            # Calling read function
+            write_todos(todos)
             print(f"Todo item '{todo_to_remove}' was removed from the list.")
 
         except ValueError:

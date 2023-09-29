@@ -6,10 +6,12 @@ FILEPATH = "files/questions.json"
 
 
 def read_file(FILEPATH):
+   """ Read a text file and return the list of
+     to-do items.
+    """
     with open(FILEPATH) as file:
         content = file.read()
     return content
-
 
 def read_json(JSONFILE):
     score = 0
@@ -28,7 +30,7 @@ def read_json(JSONFILE):
                 score += 1
                 result = f"Good job!, {question['correct_answer']} is the Correct Answer!"
             else:
-                result = f"You are Wrong Answer!, {question['correct_answer']} is the right answer"
+                result = f"You entered the Wrong Answer!, {question['correct_answer']} is the right answer"
             print(result)
     except ValueError:
         print("Only numbers are allowed!")
@@ -38,6 +40,5 @@ def read_json(JSONFILE):
 
 data = read_file(FILEPATH)
 score = read_json(data)
-
 
 print(score,"/",len(json.loads(data)))
