@@ -2,11 +2,10 @@ import requests
 from pprint import pprint
 from send_email import send_email
 
+topic = "tesla"
 api_key = "b0e4bea097324433a012937cb4788bd4"
-url = "https://newsapi.org/v2/everything?q=tesla&" \
-      "from=2023-09-02&sortBy=publishedAt&api" \
-      "Key=b0e4bea097324433a012937cb4788bd4"
 
+url = "https://newsapi.org/v2/everything?q=tesla&from=2023-09-03&sortBy=publishedAt&apiKey=b0e4bea097324433a012937cb4788bd4&language=en"
 # Make a request
 r = requests.get(url)
 
@@ -15,9 +14,11 @@ content = r.json()
 
 # Access title and description from the new
 body = ""
-for article in content['articles']:
+for article in content['articles'][0:20]:
     if article["title"] is not None:
-        body = body + article["title"] + "\n" + article["description"] + 2*"\n"
+        body = body + article["title"] + "\n" + \
+               article["description"] + "\n" + article["url"] \
+               + 2*"\n"
 
 
 message = f"""\
@@ -28,3 +29,4 @@ From: kojibello058@.gmail.com
 """
 message = message.encode('utf-8')
 send_email(message)
+
